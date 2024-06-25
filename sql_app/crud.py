@@ -16,4 +16,3 @@ def update_course(db: Session, course_id: int, course: schemas.CourseCreate):
     db_course = db.query(models.Course).filter(models.Course.CID == course_id).first()
     if db_course is None:
         return None
-    for key, value in course
