@@ -30,7 +30,7 @@ class Professor(BaseModel):
     Department : str 
     Major : str
     Birth  :str
-    BornCitt : str 
+    BornCity : str 
     Address : str
     PostalCode : int 
     CPhone : str
