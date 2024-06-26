@@ -5,8 +5,8 @@ from pathlib import Path
 sys.path[0] = str(Path(sys.path[0]).parent)
 
 from sqlalchemy.orm import Session
-from sql_app import crud, models, schemas
-from sql_app.database import SessionLocal, engine
+from DataBase import crud, models, schemas
+from DataBase.database import SessionLocal, engine
 
 
 
