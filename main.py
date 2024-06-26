@@ -123,5 +123,5 @@ def delete_course(course_id: int, db: Session = Depends(get_db)):
     db_course = crud.delete_course(db, Course_id = course_id)
     if db_course is None:
         raise HTTPException(status_code=404, detail="Course not found")
-    crud.delete_course(db, Course_id=course_id)
-    return db_course
+    crud.delete_course(db, id= course_id)
+    return f"course with {course_id} id was deleted succesfully!"
