@@ -1,15 +1,8 @@
 from fastapi import Depends, FastAPI, HTTPException
-
-import sys
-from pathlib import Path
-
-sys.path[0] = str(Path(sys.path[0]).parent)
-
-import schemas
 from sqlalchemy.orm import Session
+import schemas
 from sql_app import crud, models
 from sql_app.database import SessionLocal, engine
-
 
 
 

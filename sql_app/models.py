@@ -1,7 +1,4 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String , VARCHAR
-import sys
-from pathlib import Path
-sys.path[0] = str(Path(sys.path[0]).parent)
 from sql_app.database import Base
 
 
@@ -9,7 +6,7 @@ from sql_app.database import Base
 #مدل مربوط به دانشجو
 class Student(Base):
     __tablename__ = "Students"
-    STID = Column(String , primary_key= True , min= 0 , max= 10)
+    STID = Column(String , primary_key= True)
     FName = Column(String)
     LName = Column(String)
     Father = Column(String)
