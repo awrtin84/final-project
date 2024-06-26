@@ -53,7 +53,7 @@ class Course(BaseModel):
     Credit : int  
 
 class CourseCreate(Course):
-    CID : int = Field(title="Course ID" , gt = 0)
+    CID : int 
 
 class Courseid(Course):
     CID: int

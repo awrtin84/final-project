@@ -19,7 +19,7 @@ class Student(Base):
     HPhone = Column(String)
     Department = Column(String)
     Major = Column(String)
-    Married = Column(Boolean)
+    Married = Column(String)
     ID = Column(String)
     SCourseIDs = Column(VARCHAR)
     LIds =  Column(VARCHAR)

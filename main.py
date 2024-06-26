@@ -51,8 +51,8 @@ def delete_student(student_id: int, db: Session = Depends(get_db)):
     db_student = crud.get_student(db, student_id= student_id)
     if db_student is None:
         raise HTTPException(status_code= 404, detail= "student not found")
-    crud.delete_student(db , Student_id= student_id)
-    return db_student
+    crud.delete_student(db , student_id= student_id)
+    return f"Student with {student_id} was succesfully deleted!"
 
 
 #-professor--------------------------------------------------------------------------
@@ -118,10 +118,10 @@ def update_course(course_id: str, course: schemas.Course, db: Session = Depends(
     return db_course
 
 
-@app.delete("/deletecourse/{course_id}", response_model=schemas.Course)
+@app.delete("/deletecourse/{course_id}", response_model= schemas.Course)
 def delete_course(course_id: int, db: Session = Depends(get_db)):
-    db_course = crud.delete_course(db, Course_id = course_id)
+    db_course = crud.delete_course(db, course_id= course_id)
     if db_course is None:
-        raise HTTPException(status_code=404, detail="Course not found")
-    crud.delete_course(db, id= course_id)
-    return f"course with {course_id} id was deleted succesfully!"
+        raise HTTPException(status_code=404, detail= "Course not found")
+    crud.delete_course(db, course_id= course_id)
+    return db_course
