@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 
 class Student(BaseModel):
-    STID : str
+    STID : str 
     FName : str
     LName : str
     Father : str 
@@ -47,10 +47,10 @@ class Professor(BaseModel):
 
 
 class Course(BaseModel):
-    cid : str
-    cname : str
-    department : str 
-    credit : int  
+    Cid : str
+    CName : str
+    Department : str 
+    Credit : int  
 
 class CourseCreate(Course):
     CID : int = Field(title="Course ID" , gt = 0)
