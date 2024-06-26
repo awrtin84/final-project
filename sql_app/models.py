@@ -2,7 +2,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, String , VARCHAR
 import sys
 from pathlib import Path
 sys.path[0] = str(Path(sys.path[0]).parent)
-from .database import Base
+from sql_app.database import Base
 
 
 

@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 import sys
 from pathlib import Path
 sys.path[0] = str(Path(sys.path[0]).parent)
-from . import models, schem
+from sql_app import models, schem
 
 
 def get_course(db: Session, course_id: int):
