@@ -84,7 +84,7 @@ def create_course(db: Session, course: schemas.Course):
 
 
 
-def update_course(db: Session, course_id: int, course: schemas.CourseCreate):
+def update_course(db: Session, course_id: int, course: schemas.Course):
     db_course = db.query(models.Course).filter(models.Course.CID == course_id).first()
     if db_course is None:
         return None

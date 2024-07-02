@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 import schemas
 from DB import crud, models
 from DB.database import SessionLocal, engine
-
+import validation
 
 
 models.Base.metadata.create_all(bind=engine)
@@ -97,6 +97,7 @@ def delete_professor(professor_id: int, db: Session = Depends(get_db)):
 #-course-----------------------------------------------------------------------
 @app.post("/CreateCourse/", response_model = schemas.Course)
 def create_course(course: schemas.Course, db: Session = Depends(get_db)):
+    validation.validation_course(course)
     db_course = crud.get_course(db, course_id = course.Cid)
     if db_course:
         raise HTTPException(status_code=400, detail="Course is already exists")
