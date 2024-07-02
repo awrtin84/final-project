@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 import schemas
-from sql_app import models
+from DB import models
 
 #-Student-------------------------------------------------------------------------------------------------------------------------------------
 
@@ -15,10 +15,6 @@ def create_student(db: Session , student: schemas.Student):
     db.refresh(db_student)
     return db_student
 
-def delete_student(db: Session , student_id: int):
-    db_student = db.query(models.Student).filter(models.Student.STID == student_id).first()
-    db.delete(db_student)
-    db.commit()
 
 
 def update_student(db: Session , student_id: int , student = models.Student):
@@ -32,6 +28,12 @@ def update_student(db: Session , student_id: int , student = models.Student):
         db.refresh(db_student)
         return db_student
 
+
+
+def delete_student(db: Session , student_id: int):
+    db_student = db.query(models.Student).filter(models.Student.STID == student_id).first()
+    db.delete(db_student)
+    db.commit()
 
 #-professor------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -48,11 +50,6 @@ def create_professor(db: Session , professor: schemas.Professor):
     return db_professor
 
 
-def delete_professor(db: Session , professor_id: int):
-    db_professor = db.query(models.Professor).filter(models.Professor.LID == professor_id).first()
-    db.delete(db_professor)
-    db.commit()
-
 
 def update_professor(db: Session , professor_id: int , professor: models.Professor):
     db_professor = db.query(models.Professor).filter(models.Professor.LID == professor_id).first()
@@ -64,6 +61,13 @@ def update_professor(db: Session , professor_id: int , professor: models.Profess
         db.commit()
         db.refresh(db_professor)
         return db_professor
+    
+
+
+def delete_professor(db: Session , professor_id: int):
+    db_professor = db.query(models.Professor).filter(models.Professor.LID == professor_id).first()
+    db.delete(db_professor)
+    db.commit()
 
 #Course------------------------------------------------------------------------------------------------------------------------------------
 
@@ -79,11 +83,6 @@ def create_course(db: Session, course: schemas.Course):
     return db_course
 
 
-def delete_course(db: Session , course_id: int):
-    db_course = db.query(models.Course).filter(models.Course.CID == course_id).first()
-    db.delete(db_course)
-    return db_course
-
 
 def update_course(db: Session, course_id: int, course: schemas.CourseCreate):
     db_course = db.query(models.Course).filter(models.Course.CID == course_id).first()
@@ -96,3 +95,9 @@ def update_course(db: Session, course_id: int, course: schemas.CourseCreate):
         db.refresh(db_course)
         return db_course
     
+
+
+def delete_course(db: Session , course_id: int):
+    db_course = db.query(models.Course).filter(models.Course.CID == course_id).first()
+    db.delete(db_course)
+    return db_course    

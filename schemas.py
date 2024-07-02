@@ -1,4 +1,5 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
+
 
 class Student(BaseModel):
     STID : str 
@@ -19,6 +20,8 @@ class Student(BaseModel):
     SCourseIDs : str
     LIds : str
 
+    class Config:
+        orm_mode = True
 
 
 
@@ -37,26 +40,14 @@ class Professor(BaseModel):
     Hphone :str
     LCourseIDs : str
 
-
-
-
-
-
-
-
-
+    class Config:
+        orm_mode = True
 
 class Course(BaseModel):
     Cid : str
     CName : str
     Department : str 
     Credit : int  
-
-class CourseCreate(Course):
-    CID : int 
-
-class Courseid(Course):
-    CID: int
 
     class Config:
         orm_mode = True

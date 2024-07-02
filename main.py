@@ -1,8 +1,8 @@
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 import schemas
-from sql_app import crud, models
-from sql_app.database import SessionLocal, engine
+from DB import crud, models
+from DB.database import SessionLocal, engine
 
 
 
@@ -22,7 +22,7 @@ def get_db():
 
 #-Student----------------------------------------------------------------------------------
 
-@app.post("/createSudent/" , response_model = schemas.Student)
+@app.post("/createstudent/" , response_model = schemas.Student)
 def create_student(student: schemas.Student , db: Session = Depends(get_db)):
     db_student = crud.get_student(db, student_id= student.STID)
     if db_student:
@@ -52,7 +52,8 @@ def delete_student(student_id: int, db: Session = Depends(get_db)):
     if db_student is None:
         raise HTTPException(status_code= 404, detail= "student not found")
     crud.delete_student(db , student_id= student_id)
-    return f"Student with {student_id} was succesfully deleted!"
+    return db_student
+    
 
 
 #-professor--------------------------------------------------------------------------
