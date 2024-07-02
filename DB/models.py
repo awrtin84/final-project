@@ -60,4 +60,4 @@ class Course(Base):
     CID = Column(String , primary_key= True)
     CName = Column(String)
     Department = Column(String)
-    Credit = Column(Integer)
+    Credit = Column(String)

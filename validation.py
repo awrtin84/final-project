@@ -1,4 +1,5 @@
 import re
+from fastapi import HTTPException
 
 
 def validation_student(student):
@@ -60,13 +61,14 @@ def validation_student(student):
     if re.fullmatch(pattern= id_pattern , string= student.ID) == None:
         errors["ID"]= '!شماره ملی نامعتبر می باشد'
     
-
+    if errors:
+        raise HTTPException(detail= errors , status_code= 400)
 
 
 def validation_course(course):
     name_pattern = r"[آ-ی\s]+"
     cid_pattern = r"\d{5}"
-    department_pattern = r"(فنی و مهندسی |اقتصاد|علوم پایه|ادبیات|منابع طبیعی|کشاورزی)"
+    department_pattern = r"(فنی و مهندسی|اقتصاد|علوم پایه|ادبیات|منابع طبیعی|کشاورزی)"
     credits_pattern = r"[1-4]"
 
 
@@ -81,4 +83,7 @@ def validation_course(course):
         errors["Department"]= '!دانشکده باید از دانشکده های مجاز باشد'
     
     if re.fullmatch(pattern= credits_pattern , string= course.Credit) == None:
-        errors["Credit"]
+        errors["Credit"]= '!تعداد واحد باید بین 1 تا 4 باشد'
+
+    if errors:
+        raise HTTPException(detail= errors , status_code= 400)

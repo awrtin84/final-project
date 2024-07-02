@@ -44,10 +44,10 @@ class Professor(BaseModel):
         orm_mode = True
 
 class Course(BaseModel):
-    Cid : str
+    CID : str
     CName : str
     Department : str 
-    Credit : int  
+    Credit : str 
 
     class Config:
         orm_mode = True

@@ -98,7 +98,7 @@ def delete_professor(professor_id: int, db: Session = Depends(get_db)):
 @app.post("/CreateCourse/", response_model = schemas.Course)
 def create_course(course: schemas.Course, db: Session = Depends(get_db)):
     validation.validation_course(course)
-    db_course = crud.get_course(db, course_id = course.Cid)
+    db_course = crud.get_course(db, course_id = course.CID)
     if db_course:
         raise HTTPException(status_code=400, detail="Course is already exists")
     return crud.create_course(db=db, course=course)

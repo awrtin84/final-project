@@ -76,7 +76,7 @@ def get_course(db: Session, course_id: int):
 
 
 def create_course(db: Session, course: schemas.Course):
-    db_course = models.Course(CID = course.Cid ,CName = course.CName , Department = course.Department , Credit = course.Credit  )
+    db_course = models.Course(CID = course.CID ,CName = course.CName , Department = course.Department , Credit = course.Credit  )
     db.add(db_course)
     db.commit()
     db.refresh(db_course)
