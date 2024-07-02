@@ -5,7 +5,7 @@ class Student(BaseModel):
     STID : str 
     FName : str
     LName : str
-    Father : str 
+    DName : str 
     Birth : str
     IDS : str
     BornCity : str
@@ -27,17 +27,17 @@ class Student(BaseModel):
 
 class Professor(BaseModel):
     LID : str
-    Fname : str
-    Lname : str
+    FName : str
+    LName : str
     ID : str 
     Department : str 
     Major : str
     Birth  :str
     BornCity : str 
     Address : str
-    PostalCode : int 
+    PostalCode : str 
     CPhone : str
-    Hphone :str
+    HPhone :str
     LCourseIDs : str
 
     class Config:

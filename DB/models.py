@@ -9,7 +9,7 @@ class Student(Base):
     STID = Column(String , primary_key= True)
     FName = Column(String)
     LName = Column(String)
-    Father = Column(String)
+    DName = Column(String)
     Birth = Column(String)
     IDS = Column(String)
     BornCity = Column(String)
@@ -34,8 +34,8 @@ class Professor(Base):
     __tablename__ = "Professors"
 
     LID = Column(Integer , primary_key=True)
-    Fname = Column(String)
-    Lname = Column(String)
+    FName = Column(String)
+    LName = Column(String)
     ID = Column(String)
     Department = Column(String)
     Major = Column(String)
@@ -44,7 +44,7 @@ class Professor(Base):
     Address = Column(String)
     PostalCode = Column(Integer)
     CPhone = Column(String)
-    Hphone = Column(String)
+    HPhone = Column(String)
     LCourseIDs = Column(VARCHAR)
 
 

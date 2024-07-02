@@ -24,6 +24,7 @@ def get_db():
 
 @app.post("/createstudent/" , response_model = schemas.Student)
 def create_student(student: schemas.Student , db: Session = Depends(get_db)):
+    validation.validation_student(student)
     db_student = crud.get_student(db, student_id= student.STID)
     if db_student:
         raise HTTPException(status_code= 400, detail= "student is already registerd")
@@ -61,10 +62,11 @@ def delete_student(student_id: int, db: Session = Depends(get_db)):
 
 @app.post("/createprofessor/", response_model= schemas.Professor)
 def create_professor(professor: schemas.Professor, db: Session = Depends(get_db)):
-    db_professor = crud.get_professor(db, Professor_id= professor.LID)
+    validation.validation_professor(professor)
+    db_professor = crud.get_professor(db, professor.LID)
     if db_professor:
         raise HTTPException(status_code= 400, detail= "Professor is already registerd")
-    return crud.create_professoe(db= db, professor= professor)
+    return crud.create_professor(db= db, professor= professor)
 
 
 @app.get("/getprofessor/{professor_id}", response_model= schemas.Professor)

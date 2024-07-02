@@ -43,7 +43,7 @@ def get_professor(db: Session , professor_id: int):
 
 
 def create_professor(db: Session , professor: schemas.Professor):
-    db_professor  = models.Professor(LID = professor.LID , Fname = professor.Fname , Lname = professor.Lname , ID = professor.ID , Department = professor.Department ,Major = professor.Major , Birth = professor.Birth , BornCity = professor.BornCity , Address = professor.Address ,  PostalCode = professor.PostalCode ,CPhone = professor.CPhone , Hphone = professor.Hphone , LCourseIDs = professor.LCourseIDs)
+    db_professor  = models.Professor(LID = professor.LID , FName = professor.FName , LName = professor.LName , ID = professor.ID , Department = professor.Department ,Major = professor.Major , Birth = professor.Birth , BornCity = professor.BornCity , Address = professor.Address ,  PostalCode = professor.PostalCode ,CPhone = professor.CPhone , HPhone = professor.HPhone , LCourseIDs = professor.LCourseIDs)
     db.add(db_professor)
     db.commit()
     db.refresh(db_professor)
