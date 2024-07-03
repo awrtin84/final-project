@@ -5,7 +5,7 @@ from fastapi import HTTPException
 
 def validation_student(student):
     names_pattern = r"[آ-ی\s]+"
-    stid_pattern = r"^(([400-402])114150([01-99]))"
+    stid_pattern = r"(^([400-402])114150([01-99]))"
     birth_pattern = r"^(\d{4}\/(0[1-9]|1[012])\/(0[1-9]|[12][0-9]|3[01]))"
     ids_pattern = r"^([1-9][0-9]{5})\/([آ-ی])([01-99])$"
     borncity_pattern = r"(اردبیل|ارومیه|اصفهان|ایلام|تبریز|تهران|کرج|بوشهر|بیرجند|شهرکرد|مشهد|اهواز|بجنورد|زهدان|سمنان|زنجان|قم|قزوین|شیراز|ساری|سنندج|کرمان|کرمانشاه|یاسوج|گرگان|خرم آباد|رشت|اراک|بندرعباس|یزد|همدان)"
@@ -42,7 +42,7 @@ def validation_student(student):
     if len(student.Address) > 100:
         errors["Address"]= '!آدرس محل زندگی باید کمتر از 100 کارکتر باشد'
 
-    if len(student.PostalCode) != 10 or student.PostalCode.isdigit() == None:
+    if len(str(student.PostalCode)) != 10:
         errors["PostalCode"]= '!کد پستی باید عددی 10 رقم باشد'
 
     if re.fullmatch(pattern= cphone_pattern , string= student.CPhone) == None:
@@ -69,7 +69,6 @@ def validation_student(student):
 
 
 def validation_professor(professor):
-    lid_pattern = r"\d{6}"
     names_pattern = r"[آ-ی\s]+"
     id_pattern = r"^[1-9]\d{9}$"
     department_pattern = r"(فنی و مهندسی|اقتصاد|علوم پایه|ادبیات|منابع طبیعی|کشاورزی)"
@@ -82,8 +81,8 @@ def validation_professor(professor):
 
     errors= {}
 
-    if re.fullmatch(pattern=lid_pattern , string= professor.LID) == None:
-        errors["LID"]= '!کد استاد باید عددی 6 رقمی باشد می باشد'
+    if len(str(professor.LID)) != 6 :
+        errors["LID"]= '!کد استاد باید عددی 6 رقمی باشد'
 
     if re.fullmatch(pattern= names_pattern , string= professor.FName) == None or len(professor.FName) > 10:
         errors["Name"]= '!نام باید فقط با حروف فارسی و کمتر از 10 کارکتر باشند '
@@ -109,7 +108,7 @@ def validation_professor(professor):
     if len(professor.Address) > 100:
         errors["Address"]= '!آدرس محل زندگی باید کمتر از 100 کارکتر باشد'
 
-    if len(professor.PostalCode) != 10 or professor.PostalCode.isdigit() == None:
+    if len(str(professor.PostalCode)) != 10:
         errors["PostalCode"]= '!کد پستی باید عددی 10 رقم باشد'
 
     if re.fullmatch(pattern= cphone_pattern , string= professor.CPhone) == None:
@@ -127,7 +126,7 @@ def validation_course(course):
     name_pattern = r"[آ-ی\s]+"
     cid_pattern = r"\d{5}"
     department_pattern = r"(فنی و مهندسی|اقتصاد|علوم پایه|ادبیات|منابع طبیعی|کشاورزی)"
-    credits_pattern = r"[1-4]"
+    
 
 
     errors = {}
@@ -140,8 +139,8 @@ def validation_course(course):
     if re.fullmatch(pattern= department_pattern , string= course.Department) == None:
         errors["Department"]= '!دانشکده باید از دانشکده های مجاز باشد'
     
-    if re.fullmatch(pattern= credits_pattern , string= course.Credit) == None:
-        errors["Credit"]= '!تعداد واحد باید بین 1 تا 4 باشد'
+    if not 1 < course.Credit < 4:
+        errors["Credit"]= '!واحد دروس باید عددی بین 1 تا 4 باشد'
 
     if errors:
         raise HTTPException(status_code= 400 , detail= errors)

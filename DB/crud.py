@@ -100,4 +100,4 @@ def update_course(db: Session, course_id: int, course: schemas.Course):
 def delete_course(db: Session , course_id: int):
     db_course = db.query(models.Course).filter(models.Course.CID == course_id).first()
     db.delete(db_course)
-    return db_course    
+    db.commit()    

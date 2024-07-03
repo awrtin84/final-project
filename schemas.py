@@ -10,7 +10,7 @@ class Student(BaseModel):
     IDS : str
     BornCity : str
     Address : str
-    PostalCode : str
+    PostalCode : int
     CPhone : str
     HPhone : str
     Department : str
@@ -26,7 +26,7 @@ class Student(BaseModel):
 
 
 class Professor(BaseModel):
-    LID : str
+    LID : int
     FName : str
     LName : str
     ID : str 
@@ -35,7 +35,7 @@ class Professor(BaseModel):
     Birth  :str
     BornCity : str 
     Address : str
-    PostalCode : str 
+    PostalCode : int 
     CPhone : str
     HPhone :str
     LCourseIDs : str
@@ -43,11 +43,13 @@ class Professor(BaseModel):
     class Config:
         orm_mode = True
 
+
+
 class Course(BaseModel):
     CID : str
     CName : str
     Department : str 
-    Credit : str 
+    Credit : int
 
     class Config:
         orm_mode = True
