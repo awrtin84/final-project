@@ -24,10 +24,23 @@ def get_db():
 
 @app.post("/createstudent/" , response_model = schemas.Student)
 def create_student(student: schemas.Student , db: Session = Depends(get_db)):
-    validation.validation_student(student)
     db_student = crud.get_student(db, student.STID)
     if db_student:
         raise HTTPException(status_code= 400, detail= "student is already registerd")
+    validation.validation_student(student)
+    error = {}
+    scourseids = student.SCourseIDs.split(",")
+    for i in scourseids:
+        db_relation_scourse = crud.get_course(db , i)
+        if db_relation_scourse is None:
+            error["SCourseID"]= '!درس انتخاب شده جزو دروس ارایه شده این ترم نمی باشد'
+    lids = student.LIds.split(",")
+    for i in lids:
+        db_relation_lids = crud.get_professor(db , i)
+        if db_relation_lids == None:
+            error["LIDs"]= '!استاد انتتخاب شده این ترم درسی را ارایه نمی کند'
+    if error:
+        raise HTTPException(status_code= 400 , detail= error)
     return crud.create_student(db, student)
 
 
@@ -44,6 +57,20 @@ def update_student(student_id: str, student: schemas.Student, db: Session = Depe
     db_student = crud.update_student(db, student_id, student)
     if db_student is None:
         raise HTTPException(status_code=404, detail= "Student not found")
+    validation.validation_student(student)
+    error = {}
+    scourseids = student.SCourseIDs.split(",")
+    for i in scourseids:
+        db_relation_scourse = crud.get_course(db , i)
+        if db_relation_scourse is None:
+            error["SCourseID"]= '!درس انتخاب شده جزو دروس ارایه شده این ترم نمی باشد'
+    lids = student.LIds.split(",")
+    for i in lids:
+        db_relation_lids = crud.get_professor(db , i)
+        if db_relation_lids == None:
+            error["LIDs"]= '!استاد انتتخاب شده این ترم درسی را ارایه نمی کند'
+    if error:
+        raise HTTPException(status_code= 400 , detail= error)
     return db_student
 
  
@@ -62,10 +89,19 @@ def delete_student(student_id: int, db: Session = Depends(get_db)):
 
 @app.post("/createprofessor/", response_model= schemas.Professor)
 def create_professor(professor: schemas.Professor, db: Session = Depends(get_db)):
-    validation.validation_professor(professor)
+    
     db_professor = crud.get_professor(db, professor.LID)
     if db_professor:
         raise HTTPException(status_code= 400, detail= "Professor is already registerd")
+    validation.validation_professor(professor)
+    error = {}
+    lcourseid = professor.LCourseIDs.split(",")
+    for i in lcourseid:
+        db_relation_lcourse = crud.get_course(db , i)
+        if db_relation_lcourse == None:
+            error["LCouurseIDs"]= '!کد درس انتخاب شدخ جز دروس این ترم نمی باشد'
+    if error:
+        raise HTTPException(status_code= 400 , detail= error)
     return crud.create_professor(db= db, professor= professor)
 
 
@@ -79,10 +115,19 @@ def read_professor(professor_id: int, db: Session = Depends(get_db)):
 
 
 @app.put("/professor/{professor_id}", response_model= schemas.Professor)
-def update_professor(professor_id: str, prefessor: schemas.Professor, db: Session = Depends(get_db)):
-    db_professor = crud.update_professor(db, professor_id, prefessor)
+def update_professor(professor_id: str, professor: schemas.Professor, db: Session = Depends(get_db)):
+    db_professor = crud.update_professor(db, professor_id, professor)
     if db_professor is None:
         raise HTTPException(status_code= 404, detail= "Professor not found!")
+    validation.validation_professor(professor)
+    error = {}
+    lcourseid = professor.LCourseIDs.split(",")
+    for i in lcourseid:
+        db_relation_lcourse = crud.get_course(db , i)
+        if db_relation_lcourse == None:
+            error["LCouurseIDs"]= '!کد درس انتخاب شدخ جز دروس این ترم نمی باشد'
+    if error:
+        raise HTTPException(status_code= 400 , detail= error)
     return db_professor
 
 
@@ -119,6 +164,7 @@ def update_course(course_id: str, course: schemas.Course, db: Session = Depends(
     db_course = crud.update_course(db, course_id, course)
     if db_course is None:
         raise HTTPException(status_code=404, detail="Course not found")
+    validation.validation_course(course)
     return db_course
 
 

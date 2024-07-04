@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String , VARCHAR
+from sqlalchemy import Boolean, Column ,Integer,String
 from DB.database import Base
 
 
@@ -21,8 +21,8 @@ class Student(Base):
     Major = Column(String)
     Married = Column(String)
     ID = Column(String)
-    SCourseIDs = Column(VARCHAR)
-    LIds =  Column(VARCHAR)
+    SCourseIDs = Column(String)
+    LIds =  Column(String)
 
     
 #-------------------------------------------------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ class Professor(Base):
     PostalCode = Column(Integer)
     CPhone = Column(String)
     HPhone = Column(String)
-    LCourseIDs = Column(VARCHAR)
+    LCourseIDs = Column(String)
 
 
 #---------------------------------------------------------------------------------------------------------------------------------------------

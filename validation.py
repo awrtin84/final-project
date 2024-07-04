@@ -15,6 +15,27 @@ def validation_student(student):
     major_pattern = r"(مهندسی کامپیوتر|مهندسی نفت|مهندسی برق|مهندسی پلیمر|مهندسی مکانیک|مهندسی پزشکی|مهندسی عمران|مهندسی معماری|مهندسی معدن|شهرسازی|)"
     married_pattern = r"(متاهل|مجرد)"
     id_pattern = r"^[1-9]\d{9}$"
+    scourseids = student.SCourseIDS.split(",")
+    lids = student.LIDs.split(",")
+
+
+    def check_student_id(ID):
+        sum = 0 
+        l = 10
+        for i in range(0 , l - 1):
+            c = ord(ID[i])
+            c -= 48
+            sum = sum + c * (l - i)
+        r = sum % 11
+        c = ord(ID[l - 1])
+        c -= 48
+        if r > 2:
+            r = 11 - r
+        if r == c:
+            return True
+        else:
+            return False
+        
 
 
     errors = {}
@@ -60,9 +81,17 @@ def validation_student(student):
     if re.fullmatch(pattern= married_pattern , string= student.Married) == None:
         errors["Married"]= '!وضعیت تاهل باید با متاهل یا مجرد تکمیل گردد '
         
-    if re.fullmatch(pattern= id_pattern , string= student.ID) == None:
-        errors["ID"]= '!شماره ملی نامعتبر می باشد'
-    
+    if re.fullmatch(pattern= id_pattern , string= student.ID) == None or check_student_id(student.ID) == False:
+        errors["ID"]= '!کد ملی نامعتبر می باشد'
+
+    for i in scourseids:
+        if len(i) != 5 or i.isdigit() == False:
+            errors["SCourseIDs"]= '!کد دروس باید عددی 5 رقمی باشد که به وسیله <و> از هم جدا شده اند لذا از زدن فاصله بین انها خودداری کنید'
+    for i in lids:
+        if len(i) != 6 or i.isdigit() == False:
+            errors["LIDs"]= '!کد اساتید باید عددی 6 رقمی باشد که به وسیله <و> از هم جدا شده اند لذا از زدن فاصله بین انها خودداری فرمایید'
+
+
     if errors:
         raise HTTPException(status_code= 400 , detail= errors)
 
@@ -77,7 +106,25 @@ def validation_professor(professor):
     borncity_pattern = r"(اردبیل|ارومیه|اصفهان|ایلام|تبریز|تهران|کرج|بوشهر|بیرجند|شهرکرد|مشهد|اهواز|بجنورد|زهدان|سمنان|زنجان|قم|قزوین|شیراز|ساری|سنندج|کرمان|کرمانشاه|یاسوج|گرگان|خرم آباد|رشت|اراک|بندرعباس|یزد|همدان)"
     cphone_pattern = r"^(09|\+989)(\d{9})$"
     hphone_pattern = r"^(0[1-9][0-9])([1-9]\d{7})$"
+    lcourseids = professor.LCourseIDs.split(",")
 
+    def check_professor_id(ID):
+        sum = 0 
+        l = 10
+        for i in range(0 , l - 1):
+            c = ord(ID[i])
+            c -= 48
+            sum = sum + c * (l - i)
+        r = sum % 11
+        c = ord(ID[l - 1])
+        c -= 48
+        if r > 2:
+            r = 11 - r
+        if r == c:
+            return True
+        else:
+            return False
+        
 
     errors= {}
 
@@ -90,7 +137,7 @@ def validation_professor(professor):
     if re.fullmatch(pattern= names_pattern , string= professor.LName) == None or len(professor.LName) > 10:
         errors["FName"]= '!نام خانوادگی باید فقط با حروف فارسی و کمتر از 10 کارکتر باشند '
 
-    if re.fullmatch(pattern= id_pattern , string= professor.ID) == None:
+    if re.fullmatch(pattern= id_pattern , string= professor.ID) == None or check_professor_id(professor.ID) == False:
         errors["ID"]= '!شماره ملی نامعتبر می باشد'
 
     if re.fullmatch(pattern= department_pattern , string= professor.Department) == None:
@@ -117,8 +164,13 @@ def validation_professor(professor):
     if re.fullmatch(pattern= hphone_pattern , string= professor.HPhone) == None:
         errors["HPhone"]= ' !شماره تلفن ثابت نامعتبر می باشد'
 
+    for i in lcourseids:
+        if len(i) != 5 or i.isdigit() == False:
+            errors["LCourseIDs"]= '!کد دروس باید عددی 5 رقمی باشد که به وسیه <و>از یکدیگر جدا شده اند لذا از زدن فاصله بین انها خودداری کنید'
     if errors:
         raise HTTPException(status_code= 400 , detail= errors)
+
+
 
 
 
