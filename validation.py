@@ -5,9 +5,9 @@ from fastapi import HTTPException
 
 def validation_student(student):
     names_pattern = r"[آ-ی\s]+"
-    stid_pattern = r"(^([400-402])114150([01-99]))"
+    stid_pattern = r"^(400|401|402|403)114150([01-99]{2})$"
     birth_pattern = r"^(\d{4}\/(0[1-9]|1[012])\/(0[1-9]|[12][0-9]|3[01]))"
-    ids_pattern = r"^([1-9][0-9]{5})\/([آ-ی])([01-99])$"
+    ids_pattern = r"([0-9]{6})\/([آ-ی]) [0-9]{2}"
     borncity_pattern = r"(اردبیل|ارومیه|اصفهان|ایلام|تبریز|تهران|کرج|بوشهر|بیرجند|شهرکرد|مشهد|اهواز|بجنورد|زهدان|سمنان|زنجان|قم|قزوین|شیراز|ساری|سنندج|کرمان|کرمانشاه|یاسوج|گرگان|خرم آباد|رشت|اراک|بندرعباس|یزد|همدان)"
     cphone_pattern = r"^(09|\+989)(\d{9})$"
     hphone_pattern = r"^(0[1-9][0-9])([1-9]\d{7})$"
@@ -48,7 +48,7 @@ def validation_student(student):
     if re.fullmatch(pattern= names_pattern , string= student.DName) == None or len(student.DName) > 10:
         errors["Dname"]= '!نام پدر باید فقط با حروف فارسی و کمتر از 10 کارکتر باشند '
         
-    if re.fullmatch(pattern= stid_pattern , string= student.STID) == None or len(student.STID) > 11:
+    if re.fullmatch(pattern= stid_pattern , string= student.STID) == None or len(student.STID) != 11:
         errors["STID"]= '!شماره دانشجویی را با فرمت درست وارد نمایید '
 
     if re.fullmatch(pattern=birth_pattern , string= student.Birth) == None:
