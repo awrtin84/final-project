@@ -9,7 +9,7 @@ def get_student(db: Session, student_id: int):
 
 
 def create_student(db: Session , student: schemas.Student):
-    db_student = models.Student(STID = student.STID, FName = student.FName , LName = student.LName , Father = student.Father , Birth = student.Birth , IDS = student.IDS ,BornCity = student.BornCity,Address = student.Address , PostalCode = student.PostalCode , CPhone = student.CPhone , HPhone = student.HPhone , Department = student.Department , Major = student.Major , Married = student.Married , ID = student.ID , SCourseIDs = student.SCourseIDs ,LIds = student.LIds )
+    db_student = models.Student(STID = student.STID, FirstName = student.FirstName , LastName = student.LastName , FatherName = student.FatherName , DateOfBirth = student.DateOfBirth , IDS = student.IDS ,BornCity = student.BornCity,Address = student.Address , PostalCode = student.PostalCode , CellPhone = student.CellPhone , HomePhone = student.HomePhone , Department = student.Department , Major = student.Major , Married = student.Married , ID = student.ID , SCourseIDs = student.SCourseIDs ,LIds = student.LIDs )
     db.add(db_student)
     db.commit()
     db.refresh(db_student)
@@ -43,7 +43,7 @@ def get_professor(db: Session , professor_id: int):
 
 
 def create_professor(db: Session , professor: schemas.Professor):
-    db_professor  = models.Professor(LID = professor.LID , FName = professor.FName , LName = professor.LName , ID = professor.ID , Department = professor.Department ,Major = professor.Major , Birth = professor.Birth , BornCity = professor.BornCity , Address = professor.Address ,  PostalCode = professor.PostalCode ,CPhone = professor.CPhone , HPhone = professor.HPhone , LCourseIDs = professor.LCourseIDs)
+    db_professor  = models.Professor(LID = professor.LID , FirstName = professor.FirstName , LastName = professor.LastName , ID = professor.ID , Department = professor.Department ,Major = professor.Major , DateOfBirth = professor.DateOfBirth , BornCity = professor.BornCity , Address = professor.Address ,  PostalCode = professor.PostalCode ,CellPhone = professor.CellPhone , HomePhone = professor.HomePhone , LCourseIDs = professor.LCourseIDs)
     db.add(db_professor)
     db.commit()
     db.refresh(db_professor)
@@ -76,7 +76,7 @@ def get_course(db: Session, course_id: int):
 
 
 def create_course(db: Session, course: schemas.Course):
-    db_course = models.Course(CID = course.CID ,CName = course.CName , Department = course.Department , Credit = course.Credit  )
+    db_course = models.Course(CID = course.CID ,CourseName = course.CourseName , Department = course.Department , Credit = course.Credit  )
     db.add(db_course)
     db.commit()
     db.refresh(db_course)

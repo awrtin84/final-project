@@ -3,41 +3,48 @@ from pydantic import BaseModel
 
 class Student(BaseModel):
     STID : str 
-    FName : str
-    LName : str
-    DName : str 
-    Birth : str
+    FirstName : str
+    LastName : str
+    FatherName : str 
+    DateOfBirth : str
     IDS : str
     BornCity : str
     Address : str
     PostalCode : int
-    CPhone : str
-    HPhone : str
+    CellPhone : str
+    HomePhone : str
     Department : str
     Major : str
     Married : str
     ID : str
     SCourseIDs : str
-    LIds : str
+    LIDs : str
 
     class Config:
         orm_mode = True
+
+class Student_out(BaseModel):
+    FName: str
+    LName: str
+    STID: str
+    ID: str
+
 
 
 
 class Professor(BaseModel):
     LID : int
-    FName : str
-    LName : str
+    FirstName : str
+    LastName : str
     ID : str 
     Department : str 
     Major : str
-    Birth  :str
+    DateOfBirth :str
     BornCity : str 
     Address : str
     PostalCode : int 
-    CPhone : str
-    HPhone :str
+    CellPhone : str
+    HomePhone :str
     LCourseIDs : str
 
     class Config:
@@ -45,9 +52,18 @@ class Professor(BaseModel):
 
 
 
+class professor_out(BaseModel):
+    Firstname: str
+    LastName: str
+    ID: str
+    DateofBirth: str
+
+
+
+    
 class Course(BaseModel):
     CID : str
-    CName : str
+    CourseName : str
     Department : str 
     Credit : int
 
