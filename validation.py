@@ -86,10 +86,10 @@ def validation_student(student):
 
     for i in scourseids:
         if len(i) != 5 or i.isdigit() == False:
-            errors["SCourseIDs"]= '!کد دروس انتخابی باید عددی 5 رقمی باشند که به وسیله کاما از یکدیگر جدا شده باشند'  
+            errors["SCourseIDs"]= f'باید عددی 5 رقمی باشد {i} !و به وسیله کاما از  باقی جدا شود' 
     for i in lids:
         if len(i) != 6 or i.isdigit() == False:
-            errors["LIDs"]= '!کد اساتید انتخابی باید عددی 6 رقمی باشند که به وسیله کاما از یکدیگر جدا شده اند باشند '
+            errors["LIDs"]= f'باید عددی 6 رقمی باشد {i} !و به وسیله کاما از  باقی جدا شود'
 
     if errors:
         raise HTTPException(status_code= 400 , detail= errors)
@@ -165,9 +165,7 @@ def validation_professor(professor):
 
     for i in lcourseid:
         if len(i) != 5 or i.isdigit() == False:
-            errors["LCourseIDs"]= '!کد دروس استاد باید عددی 5 رقمی باشد که به وسیله کاما از یکدیگر جدا شده باشند'
-
-    if errors:
+            errors["LCourseIDs"]=f'باید عددی 5 رقمی باشد {i} !و به وسیله کاما از  باقی جدا شود'
         raise HTTPException(status_code= 400 , detail= errors)
 
 

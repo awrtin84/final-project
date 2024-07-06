@@ -23,7 +23,7 @@ def create_professor(professor: schemas.Professor, db: Session = Depends(get_db)
     for key in lcourseids:
         db_relation_profcourse = C.get_course(db , key)
         if db_relation_profcourse is None:
-            error_choose_course["LCourseIDs"]= '!کد درس در جدول دروس موجود نمی باشد'
+            error_choose_course["LCourseIDs"]= f'در لیست دروس جدول درس {key} !موجود نمی باشد'
     if error_choose_course:
         raise HTTPException(status_code=400 , detail = error_choose_course)
     return P.create_professor(db= db, professor= professor)
@@ -49,7 +49,7 @@ def update_professor(professor_id: str, professor: schemas.Professor, db: Sessio
     for key in lcourseids:
         db_relation_profcourse = C.get_course(db , key)
         if db_relation_profcourse is None:
-            error_choose_course["LCourseIDs"]= '!کد درس در جدول دروس موجود نمی باشد'
+            error_choose_course["LCourseIDs"]= f'در لیست دروس جدول درس {key} !موجود نمی باشد'
     if error_choose_course:
         raise HTTPException(status_code=400 , detail = error_choose_course)
     return db_professor
