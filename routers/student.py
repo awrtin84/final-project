@@ -5,7 +5,7 @@ from DB.crud import student as S
 from DB.crud import course as C
 from DB.crud import professor as P
 import validation
-from depends import get_db
+from dependency import get_db
 import re
 
 

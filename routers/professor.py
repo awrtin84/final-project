@@ -4,7 +4,7 @@ from schemas import professor as schemas
 from DB.crud import professor as P
 from DB.crud import course as C
 import validation
-from depends import get_db
+from dependency import get_db
 
 router = APIRouter()
 

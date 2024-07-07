@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from schemas import course as schemas
 from DB.crud import course as crud
 import validation
-from depends import get_db
+from dependency import get_db
 
 router = APIRouter()
 
