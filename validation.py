@@ -166,6 +166,8 @@ def validation_professor(professor):
     for i in lcourseid:
         if len(i) != 5 or i.isdigit() == False:
             errors["LCourseIDs"]=f'باید عددی 5 رقمی باشد {i} !و به وسیله کاما از  باقی جدا شود'
+    
+    if errors:        
         raise HTTPException(status_code= 400 , detail= errors)
 
 
