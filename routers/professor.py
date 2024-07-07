@@ -33,7 +33,7 @@ def create_professor(professor: schemas.Professor, db: Session = Depends(get_db)
 def read_professor(professor_id: int, db: Session = Depends(get_db)):
     db_professor = P.get_professor(db, professor_id)
     if len(str(professor_id)) != 6:
-        raise HTTPException(status_code= 400 , detail=f"{professor_id} !نامعتبر می باشد لطفا دوباره وارد کنید ")
+        raise HTTPException(status_code= 400 , detail=f"!نامعتبر می باشد {professor_id} !زیرا باید عددی 6 رقمی باشد ")
     if db_professor is None:
         raise HTTPException(status_code= 404, detail= "!استاد یافت نشد")
     return db_professor
@@ -44,7 +44,7 @@ def read_professor(professor_id: int, db: Session = Depends(get_db)):
 def update_professor(professor_id: str, professor: schemas.Professor, db: Session = Depends(get_db)):
     db_professor = P.update_professor(db, professor_id, professor)
     if len(str(professor_id)) != 6:
-        raise HTTPException(status_code= 400 , detail=f"{professor_id} !نامعتبر می باشد لطفا دوباره وارد کنید ")
+        raise HTTPException(status_code= 400 ,detail=f"!نامعتبر می باشد {professor_id} !زیرا باید عددی 6 رقمی باشد ")
     if db_professor is None:
         raise HTTPException(status_code= 404, detail= "!استاد یافت نشد")
     validation.validation_professor(professor)
@@ -64,7 +64,7 @@ def update_professor(professor_id: str, professor: schemas.Professor, db: Sessio
 def delete_professor(professor_id: int, db: Session = Depends(get_db)):
     db_professor = P.get_professor(db, professor_id)
     if len(str(professor_id)) != 6:
-        raise HTTPException(status_code= 400 , detail=f"{professor_id} !نامعتبر می باشد لطفا دوباره وارد کنید ")
+        raise HTTPException(status_code= 400 , detail=f"!نامعتبر می باشد {professor_id} !زیرا باید عددی 6 رقمی باشد ")
     if db_professor is None:
         raise HTTPException(status_code= 404, detail= "!استاد یافت نشد")
     P.delete_professor(db , professor_id)

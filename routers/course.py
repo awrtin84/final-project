@@ -22,7 +22,7 @@ def create_course(course: schemas.Course, db: Session = Depends(get_db)):
 def read_course(course_id: int, db: Session = Depends(get_db)):
     db_course = crud.get_course(db, course_id)
     if len(str(course_id)) != 5:
-        raise HTTPException(status_code= 400, detail=f"{course_id} !نامعتبر می باشد")
+        raise HTTPException(status_code= 400, detail=f"نامعتبر می باشد {course_id} !زیرا باید عددی 5 رقمی باشد ")
     if db_course is None:
         raise HTTPException(status_code= 404, detail= " !درس یافت نشد")
     return db_course
@@ -32,7 +32,7 @@ def read_course(course_id: int, db: Session = Depends(get_db)):
 def update_course(course_id: str, course: schemas.Course, db: Session = Depends(get_db)):
     db_course = crud.update_course(db, course_id, course)
     if len(str(course_id)) != 5:
-        raise HTTPException(status_code= 400, detail=f"{course_id} !نامعتبر می باشد")
+        raise HTTPException(status_code= 400, detail=f"نامعتبر می باشد {course_id} !زیرا باید عددی 5 رقمی باشد ")
     if db_course is None:
         raise HTTPException(status_code=404, detail= "!درس یافت نشد")
     validation.validation_course(course)
@@ -43,7 +43,7 @@ def update_course(course_id: str, course: schemas.Course, db: Session = Depends(
 def delete_course(course_id: int, db: Session = Depends(get_db)):
     db_course = crud.get_course(db, course_id)
     if len(str(course_id)) != 5:
-        raise HTTPException(status_code= 400, detail=f"{course_id} !نامعتبر می باشد")
+        raise HTTPException(status_code= 400, detail=f"نامعتبر می باشد {course_id} !زیرا باید عددی 5 رقمی باشد ")
     if db_course is None:
         raise HTTPException(status_code=404, detail= " !درس یافت نشد")
     crud.delete_course(db, course_id)
