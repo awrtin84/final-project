@@ -21,6 +21,8 @@ def create_course(course: schemas.Course, db: Session = Depends(get_db)):
 @router.get("/getCourse/{course_id}", response_model=schemas.Course)
 def read_course(course_id: int, db: Session = Depends(get_db)):
     db_course = crud.get_course(db, course_id)
+    if len(str(course_id)) != 5:
+        raise HTTPException(status_code= 400, detail=f"{course_id} !نامعتبر می باشد")
     if db_course is None:
         raise HTTPException(status_code= 404, detail= " !درس یافت نشد")
     return db_course
@@ -29,6 +31,8 @@ def read_course(course_id: int, db: Session = Depends(get_db)):
 @router.put("/updatecourse/{course_id}", response_model=schemas.Course)
 def update_course(course_id: str, course: schemas.Course, db: Session = Depends(get_db)):
     db_course = crud.update_course(db, course_id, course)
+    if len(str(course_id)) != 5:
+        raise HTTPException(status_code= 400, detail=f"{course_id} !نامعتبر می باشد")
     if db_course is None:
         raise HTTPException(status_code=404, detail= "!درس یافت نشد")
     validation.validation_course(course)
@@ -38,6 +42,8 @@ def update_course(course_id: str, course: schemas.Course, db: Session = Depends(
 @router.delete("/deletecourse/{course_id}", response_model= schemas.Course)
 def delete_course(course_id: int, db: Session = Depends(get_db)):
     db_course = crud.get_course(db, course_id)
+    if len(str(course_id)) != 5:
+        raise HTTPException(status_code= 400, detail=f"{course_id} !نامعتبر می باشد")
     if db_course is None:
         raise HTTPException(status_code=404, detail= " !درس یافت نشد")
     crud.delete_course(db, course_id)

@@ -32,6 +32,8 @@ def create_professor(professor: schemas.Professor, db: Session = Depends(get_db)
 @router.get("/getprofessor/{professor_id}", response_model= schemas.professor_out)
 def read_professor(professor_id: int, db: Session = Depends(get_db)):
     db_professor = P.get_professor(db, professor_id)
+    if len(str(professor_id)) != 6:
+        raise HTTPException(status_code= 400 , detail=f"{professor_id} !نامعتبر می باشد لطفا دوباره وارد کنید ")
     if db_professor is None:
         raise HTTPException(status_code= 404, detail= "!استاد یافت نشد")
     return db_professor
@@ -41,6 +43,8 @@ def read_professor(professor_id: int, db: Session = Depends(get_db)):
 @router.put("/professor/{professor_id}", response_model= schemas.Professor)
 def update_professor(professor_id: str, professor: schemas.Professor, db: Session = Depends(get_db)):
     db_professor = P.update_professor(db, professor_id, professor)
+    if len(str(professor_id)) != 6:
+        raise HTTPException(status_code= 400 , detail=f"{professor_id} !نامعتبر می باشد لطفا دوباره وارد کنید ")
     if db_professor is None:
         raise HTTPException(status_code= 404, detail= "!استاد یافت نشد")
     validation.validation_professor(professor)
@@ -59,6 +63,8 @@ def update_professor(professor_id: str, professor: schemas.Professor, db: Sessio
 @router.delete("/deleteprofessor/{professor_id}", response_model= schemas.professor_out)
 def delete_professor(professor_id: int, db: Session = Depends(get_db)):
     db_professor = P.get_professor(db, professor_id)
+    if len(str(professor_id)) != 6:
+        raise HTTPException(status_code= 400 , detail=f"{professor_id} !نامعتبر می باشد لطفا دوباره وارد کنید ")
     if db_professor is None:
         raise HTTPException(status_code= 404, detail= "!استاد یافت نشد")
     P.delete_professor(db , professor_id)
