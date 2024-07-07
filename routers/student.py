@@ -9,8 +9,8 @@ from dependency import get_db
 import re
 
 
-router = APIRouter()
 
+router = APIRouter()
 
 
 
@@ -26,11 +26,11 @@ def create_student(student: schemas.Student , db: Session = Depends(get_db)):
     for key in scourseids:
         db_relation = C.get_course(db , key)
         if db_relation is None:
-            error_choose_course["SCourseids"]= f'در لیست دروس جدول درس {key} !موجود نمی باشد'
+            error_choose_course[key]= f'در لیست دروس جدول درس {key} !موجود نمی باشد'
     for key in lids:
         db_relation_lids = P.get_professor(db , key)
         if db_relation_lids is None:
-            error_choose_course["LIDs"]= f'در لیست اساتید جدول درس{key} !موجود نمی باشد'
+            error_choose_course[key]= f'در لیست اساتید جدول درس{key} !موجود نمی باشد'
     if error_choose_course:
         raise HTTPException(status_code= 400 , detail= error_choose_course)
     return S.create_student(db, student)
@@ -62,11 +62,11 @@ def update_student(student_id: str, student: schemas.Student, db: Session = Depe
     for key in scourseids:
         db_relation = C.get_course(db , key)
         if db_relation is None:
-            error_choose_course["SCourseids"]= f'در لیست دروس جدول درس {key} !موجود نمی باشد'
+            error_choose_course[key]= f'در لیست دروس جدول درس {key} !موجود نمی باشد'
     for key in lids:
         db_relation_lids = P.get_professor(db , key)
         if db_relation_lids is None:
-            error_choose_course["LIDs"]= f'در لیست اساتید جدول درس{key} !موجود نمی باشد'
+            error_choose_course[key]= f'در لیست اساتید جدول درس{key} !موجود نمی باشد'
     if error_choose_course:
         raise HTTPException(status_code= 400 , detail= error_choose_course)
     return db_student
