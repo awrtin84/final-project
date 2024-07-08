@@ -113,4 +113,83 @@
 ![image](https://github.com/awrtin84/final-project/assets/161155080/c2a68d78-5e21-4656-b5e1-62bebaca2423)
 
 
+## تست از جدول درس در fastapi swagger:
+
+### برای ساختن یک درس:
+1-
+
+![image](https://github.com/awrtin84/final-project/assets/161155080/f2c2c76b-3695-4ee4-822e-5c5b008767bc)
+
+پاسخ سرور:
+
+2-
+![image](https://github.com/awrtin84/final-project/assets/161155080/1c077127-da65-4d55-83ad-cd1cb6041a59)
+
+
+جدول پایگاه داده:
+3-
+
+![image](https://github.com/awrtin84/final-project/assets/161155080/c5bf88dd-316a-42de-904e-46e803d8b4fc)
+
+
+### برای دریافت یک درس:
+1-
+
+![image](https://github.com/awrtin84/final-project/assets/161155080/b4c67d07-f024-4bca-a087-23630eb436bc)
+
+پاسخ سرور:
+
+2-
+
+![image](https://github.com/awrtin84/final-project/assets/161155080/2a59e805-2e37-4ff4-b303-44b0ea53e632)
+
+
+### برای آپدیت کردن یک درس:
+
+1-
+
+![image](https://github.com/awrtin84/final-project/assets/161155080/9f23a362-329d-4b16-8ce7-51da6b94b2e7)
+
+پاسخ سرور:
+
+2-
+
+![image](https://github.com/awrtin84/final-project/assets/161155080/5a84a39c-c2f2-40cf-a30e-4506cfb6672e)
+
+
+جدول پایگاه داده:
+
+3-
+![image](https://github.com/awrtin84/final-project/assets/161155080/638e8e69-3b75-45c2-b799-a1039010c269)
+
+
+### برای حذف کردن درس:
+
+1-
+
+![image](https://github.com/awrtin84/final-project/assets/161155080/a593f6e2-6dc0-4f16-908e-604397bdf3ca)
+
+
+
+پاسخ سرور:
+2-
+
+![image](https://github.com/awrtin84/final-project/assets/161155080/e358681d-4481-41c3-9a35-921a433a8fd9)
+
+جدول پایگاه داده:
+
+3-
+
+![image](https://github.com/awrtin84/final-project/assets/161155080/0888b690-ef86-4b67-a66a-ebdbc2817181)
+
+
+# پایان
+
+
+
+
+
+
+
+
 
