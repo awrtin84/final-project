@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from schemas import professor as schemas
-from models import professor as models
+from Schemas import professor as schemas
+from Models import professor as models
 
 
 def get_professor(db: Session , professor_id: int):

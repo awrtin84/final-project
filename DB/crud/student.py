@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from schemas import student as schemas
-from models import student as models
+from Schemas import student as schemas
+from Models import student as models
 
 
 
@@ -16,7 +16,6 @@ def create_student(db: Session , student: schemas.Student):
     return db_student
 
 
-
 def update_student(db: Session , student_id: int , student = models.Student):
     db_student = db.query(models.Student).filter(models.Student.STID == student_id).first()
     if db_student is None:
@@ -27,7 +26,6 @@ def update_student(db: Session , student_id: int , student = models.Student):
         db.commit()
         db.refresh(db_student)
         return db_student
-
 
 
 def delete_student(db: Session , student_id: int):

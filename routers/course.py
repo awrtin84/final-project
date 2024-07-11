@@ -1,8 +1,8 @@
 from fastapi import Depends, HTTPException, APIRouter
 from sqlalchemy.orm import Session
-from schemas import course as schemas
+from Schemas import course as schemas
 from DB.crud import course as crud
-import validation
+from Validations import course as c
 from dependency import get_db
 
 router = APIRouter()
@@ -11,7 +11,7 @@ router = APIRouter()
 #-course--
 @router.post("/CreateCourse/", response_model = schemas.Course)
 def create_course(course: schemas.Course, db: Session = Depends(get_db)):
-    validation.validation_course(course)
+    c.validation_course(course)
     db_course = crud.get_course(db, course.CID)
     if db_course:
         raise HTTPException(status_code=400, detail="!درس قبلا ثبت شده است")
@@ -35,7 +35,7 @@ def update_course(course_id: str, course: schemas.Course, db: Session = Depends(
         raise HTTPException(status_code= 400, detail=f"نامعتبر می باشد {course_id} !زیرا باید عددی 5 رقمی باشد ")
     if db_course is None:
         raise HTTPException(status_code=404, detail= "!درس یافت نشد")
-    validation.validation_course(course)
+    c.validation_course(course)
     return db_course
 
 

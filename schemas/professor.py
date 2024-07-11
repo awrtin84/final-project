@@ -17,7 +17,7 @@ class Professor(BaseModel):
     LCourseIDs : str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class professor_out(BaseModel):

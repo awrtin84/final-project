@@ -1,6 +1,6 @@
 from DB.database import engine, Base
 from fastapi import FastAPI
-from routers import student, professor, course
+from Routers import course, professor, student
 
 
 

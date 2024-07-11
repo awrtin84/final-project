@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from schemas import course as schemas
-from models import course as models
+from Schemas import course as schemas
+from Models import course as models
 
 
 

@@ -1,9 +1,9 @@
 from fastapi import Depends, HTTPException, APIRouter
 from sqlalchemy.orm import Session
-from schemas import professor as schemas
+from Schemas import professor as schemas
 from DB.crud import professor as P
 from DB.crud import course as C
-import validation
+from Validations import professor as p
 from dependency import get_db
 
 
@@ -19,7 +19,7 @@ def create_professor(professor: schemas.Professor, db: Session = Depends(get_db)
     db_professor = P.get_professor(db, professor.LID)
     if db_professor:
         raise HTTPException(status_code= 400, detail= "!استاد قبلا ثبت شده است")
-    validation.validation_professor(professor)
+    p.validation_professor(professor)
     error_choose_course = {}
     lcourseids = professor.LCourseIDs.split(",")
     for key in lcourseids:
@@ -49,7 +49,7 @@ def update_professor(professor_id: str, professor: schemas.Professor, db: Sessio
         raise HTTPException(status_code= 400 ,detail=f"!نامعتبر می باشد {professor_id} !زیرا باید عددی 6 رقمی باشد ")
     if db_professor is None:
         raise HTTPException(status_code= 404, detail= "!استاد یافت نشد")
-    validation.validation_professor(professor)
+    p.validation_professor(professor)
     error_choose_course = {}
     lcourseids = professor.LCourseIDs.split(",")
     for key in lcourseids:

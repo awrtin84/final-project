@@ -1,10 +1,10 @@
 from fastapi import Depends, HTTPException, APIRouter
 from sqlalchemy.orm import Session
-from schemas import student as schemas
+from Schemas import student as schemas
 from DB.crud import student as S
 from DB.crud import course as C
 from DB.crud import professor as P
-import validation
+from Validations import student as s
 from dependency import get_db
 import re
 
@@ -19,7 +19,7 @@ def create_student(student: schemas.Student , db: Session = Depends(get_db)):
     db_student = S.get_student(db, student.STID)
     if db_student:
         raise HTTPException(status_code= 400, detail= "!دانشجو قبلا ثبت شده است")
-    validation.validation_student(student)
+    s.validation_student(student)
     error_choose_course = {}
     scourseids = student.SCourseIDs.split(",")
     lids = student.LIDs.split(",")
@@ -55,7 +55,7 @@ def update_student(student_id: str, student: schemas.Student, db: Session = Depe
         raise HTTPException(status_code= 400, detail= f'{student_id}!نامعتبر می باشد لطفا دوباره تلاش کنید')
     if db_student is None:
         raise HTTPException(status_code=404, detail= "!دانشجو یافت نشد")
-    validation.validation_student(student)
+    s.validation_student(student)
     error_choose_course = {}
     scourseids = student.SCourseIDs.split(",")
     lids = student.LIDs.split(",")
