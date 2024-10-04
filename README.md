@@ -10,7 +10,7 @@
    - config.py
    - depends.py
    - main.py
-   - validation.py
+   
 
 2. پوشه DB:
    - __init__.py
@@ -38,9 +38,15 @@
    - course.py
    - professor.py
    - student.py
+  
+6. پوشه - validation:
 
+   - __init__.py
+   - course.py
+   - professor.py
+   - student.py
      
-## فایل main.py:
+## فایل run.py:
 این فایل برنامه را با استفاده از uvicorn اجرا می‌کند:
 ![image](https://github.com/awrtin84/final-project/assets/161155080/dce1a7cb-a9ec-4aa7-8b3b-d96a685b447d)
 
@@ -106,9 +112,9 @@
 شامل لیست کتابخانه‌ها و پکیج‌های پایتون مورد نیاز پروژه است که باید نصب شوند.
 
 
-## فایل validation.py:
+## فایل های validation.py:
 
-در این فایل قوانین و توابع اعتبارسنجی داده‌ها تعریف شده است. وظیفه این ماژول بررسی و تضمین صحت داده‌های ورودی است.که نمونه آن را برای course:
+در این ماژول ها قوانین و توابع اعتبارسنجی داده‌ها تعریف شده است. وظیفه این ماژول بررسی و تضمین صحت داده‌های ورودی است.که نمونه آن را برای course:
 
 ![image](https://github.com/awrtin84/final-project/assets/161155080/c2a68d78-5e21-4656-b5e1-62bebaca2423)
 
