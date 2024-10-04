@@ -46,7 +46,7 @@
    - professor.py
    - student.py
      
-## فایل run.py:
+## فایل main.py:
 این فایل برنامه را با استفاده از uvicorn اجرا می‌کند:
 ![image](https://github.com/awrtin84/final-project/assets/161155080/dce1a7cb-a9ec-4aa7-8b3b-d96a685b447d)
 
